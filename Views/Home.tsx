@@ -3,14 +3,19 @@ import { Text, StyleSheet, View, Button } from 'react-native'
 
 export default class Home extends Component {
     render() {
-        
         return (
             
             <View>
-                <Text> HomePage </Text>
                 <Button 
-                    onPress={ () => {this.props.navigation.navigate("ListView")}}
-                    title="Go to ListView" />
+                    onPress={ () => {this.props.navigation.navigate("ShuffleScreen")}}
+                    title="Barajear" />
+                <Button 
+                    onPress={ () => {this.props.navigation.navigate("CardManagerScreen.View")}}
+                    title="Tablas" />
+                <Button 
+                    onPress={ () => {this.props.navigation.navigate("PlayScreen")}}
+                    title="Play" />
+
             </View>
         )
     }
