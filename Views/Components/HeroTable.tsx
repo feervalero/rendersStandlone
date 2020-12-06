@@ -27,7 +27,7 @@ class HeroTable extends Component {
                   item.toString() == "0" ? styles.card : styles.cardHighlight
                 }
               >
-                <Text style={{ fontSize: 40 }}></Text>
+                <Text style={{ fontSize: 20 }}>{item}</Text>
               </View>
             ))}
           </View>
@@ -41,18 +41,18 @@ export default HeroTable;
 
 const styles = StyleSheet.create({
   card: {
-    width: 60,
+    width: 70,
     height: 90,
-    padding: 30,
+
     borderColor: "black",
     borderWidth: 1,
     alignItems: "center",
     justifyContent: "center",
   },
   cardHighlight: {
-    width: 60,
+    width: 70,
     height: 90,
-    padding: 30,
+
     borderColor: "black",
     borderWidth: 1,
     alignItems: "center",

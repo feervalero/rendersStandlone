@@ -10,6 +10,10 @@ import ShuffleView from "./Views/Shuffle/ShuffleView";
 import SelectStyle from "./Views/CardManagement/SelectStyle";
 import SelectDouble from "./Views/CardManagement/SelectDouble";
 import SaveOrEdit from "./Views/CardManagement/SaveOrEdit";
+import TableSelector from "./Views/Play/TableSelector";
+import PlayView from "./Views/Play/PlayView";
+import WinView from "./Views/Play/WinView";
+import Gestures from "./Views/AppManagement/Gestures";
 
 const Stack = createStackNavigator();
 
@@ -35,6 +39,18 @@ export default function App({ navigation }) {
         </Stack.Screen>
         <Stack.Screen name="CardManagerScreen.SaveOrEdit">
           {(props) => <SaveOrEdit {...props} />}
+        </Stack.Screen>
+        <Stack.Screen name="Play.Selector">
+          {(props) => <TableSelector {...props} />}
+        </Stack.Screen>
+        <Stack.Screen name="Play.View">
+          {(props) => <PlayView {...props} />}
+        </Stack.Screen>
+        <Stack.Screen name="Play.Win">
+          {(props) => <WinView {...props} />}
+        </Stack.Screen>
+        <Stack.Screen name="Gestures">
+          {(props) => <Gestures {...props} />}
         </Stack.Screen>
         <Stack.Screen name="ShuffleScreen">
           {(props) => <ShuffleView {...props} />}
