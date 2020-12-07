@@ -55,7 +55,7 @@ const Gestures = () => {
               outputRange: [-CARD_WIDTH * index, 0],
               extrapolate: Extrapolate.CLAMP,
             });
-
+            /*Cambio en MAC */
             return (
               <Animated.View
                 key={card.id}
