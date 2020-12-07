@@ -15,12 +15,13 @@ import {
   diffClamp,
 } from "react-native-redash";
 import Cards from "./Cards";
+import { CARD_WIDTH } from "./Config";
 
 const { height, width } = Dimensions.get("window");
-const MARGIN = 20;
-const PADDING = 15;
-const CARD_HEIGHT = 150;
-const CARD_WIDTH = width - MARGIN * 2 - PADDING * 2 - 70;
+const MARGIN = 10;
+const PADDING = 10;
+
+const CARDWIDTH = CARD_WIDTH;
 const Gestures = () => {
   const [containerHeight, setContainertHeight] = useState(height);
   const {
@@ -35,7 +36,7 @@ const Gestures = () => {
       velocity: velocity.x,
       state,
     }),
-    -(Cards.length * CARD_WIDTH),
+    -(Cards.length * CARDWIDTH),
     0
   );
 
@@ -51,8 +52,8 @@ const Gestures = () => {
         <Animated.View style={{ flexDirection: "row" }}>
           {Cards.map((card, index) => {
             const translateX = interpolate(x, {
-              inputRange: [-CARD_WIDTH * index, 0],
-              outputRange: [-(CARD_WIDTH + 40) * index, 0],
+              inputRange: [-CARDWIDTH * index, 0],
+              outputRange: [-(CARDWIDTH + 40) * index, 0],
               extrapolate: Extrapolate.CLAMP,
             });
             /*Cambio en MAC */
@@ -76,12 +77,12 @@ export default Gestures;
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: "#eee",
+    backgroundColor: "white",
     padding: PADDING,
     margin: MARGIN,
-    width: CARD_WIDTH,
+    width: CARD_WIDTH + MARGIN + PADDING,
     borderColor: "gray",
     borderWidth: 1,
-    borderRadius: 20,
+    borderRadius: 15,
   },
 });
