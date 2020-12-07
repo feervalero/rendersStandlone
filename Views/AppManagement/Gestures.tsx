@@ -16,9 +16,11 @@ import {
 } from "react-native-redash";
 import Cards from "./Cards";
 
-const { height } = Dimensions.get("window");
+const { height, width } = Dimensions.get("window");
 const MARGIN = 20;
+const PADDING = 15;
 const CARD_HEIGHT = 150;
+const CARD_WIDTH = width - MARGIN * 2 - PADDING * 2 - 70;
 const Gestures = () => {
   const [containerHeight, setContainertHeight] = useState(height);
   const {
@@ -27,13 +29,13 @@ const Gestures = () => {
     velocity,
     state,
   } = usePanGestureHandler();
-  const y = diffClamp(
+  const x = diffClamp(
     withDecay({
-      value: translation.y,
-      velocity: velocity.y,
+      value: translation.x,
+      velocity: velocity.x,
       state,
     }),
-    -(Cards.length * CARD_HEIGHT),
+    -(Cards.length * CARD_WIDTH),
     0
   );
 
@@ -46,20 +48,18 @@ const Gestures = () => {
       }) => setContainertHeight(h)}
     >
       <PanGestureHandler {...gestureHandler}>
-        <Animated.View style={{}}>
+        <Animated.View style={{ flexDirection: "row" }}>
           {Cards.map((card, index) => {
-            const translateY = interpolate(y, {
-              inputRange: [-CARD_HEIGHT * index, 0],
-              outputRange: [(-CARD_HEIGHT - 40) * index, 0],
+            const translateX = interpolate(x, {
+              inputRange: [-CARD_WIDTH * index, 0],
+              outputRange: [-CARD_WIDTH * index, 0],
               extrapolate: Extrapolate.CLAMP,
             });
-
-            const positionY = add(y, index * CARD_HEIGHT);
 
             return (
               <Animated.View
                 key={card.id}
-                style={[styles.card, { transform: [{ translateY }] }]}
+                style={[styles.card, { transform: [{ translateX }] }]}
               >
                 <Card {...card} />
               </Animated.View>
@@ -75,10 +75,10 @@ export default Gestures;
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: "cyan",
-    padding: 15,
+    backgroundColor: "#eee",
+    padding: PADDING,
     margin: MARGIN,
-    height: CARD_HEIGHT,
+    width: CARD_WIDTH,
     borderColor: "gray",
     borderWidth: 1,
     borderRadius: 20,
