@@ -52,10 +52,11 @@ const Gestures = () => {
           {Cards.map((card, index) => {
             const translateX = interpolate(x, {
               inputRange: [-CARD_WIDTH * index, 0],
-              outputRange: [-CARD_WIDTH * index, 0],
+              outputRange: [-(CARD_WIDTH + 40) * index, 0],
               extrapolate: Extrapolate.CLAMP,
             });
             /*Cambio en MAC */
+            /*Cambio en windows */
             return (
               <Animated.View
                 key={card.id}
