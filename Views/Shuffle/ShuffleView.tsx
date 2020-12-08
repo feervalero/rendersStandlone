@@ -6,9 +6,10 @@ import { TouchableOpacity as Button } from "react-native";
 
 import Slider from "../Components/Slider";
 import Cards, { Card } from "../AppManagement/Cards";
+import { color } from "react-native-reanimated";
 export default class ShuffleView extends Component {
   state = {
-    currentCard: 99,
+    currentCard: 0,
     isRunning: false,
     numbers: [],
     toggle: false,
@@ -33,7 +34,7 @@ export default class ShuffleView extends Component {
   };
   restart = () => {
     this.setState({
-      currentCard: 99,
+      currentCard: 0,
       isRunning: false,
       numbers: [],
       toggle: false,
@@ -73,12 +74,19 @@ export default class ShuffleView extends Component {
   ///#endregion
   render() {
     return (
-      <View>
-        <View>
+      <View
+        style={{
+          flexDirection: "column",
+          flex: 1,
+          borderColor: "green",
+          borderWidth: 1,
+        }}
+      >
+        <View style={{ height: 150 }}>
           <Slider Cards={this.state.usedCards} />
         </View>
         {/*<Carrousel cardHistory={this.state.usedCards} />*/}
-        <View>
+        <View style={{ flex: 1, flexGrow: 1 }}>
           <HeroCard currentCard={this.state.currentCard} />
         </View>
         <View>
@@ -113,8 +121,6 @@ export default class ShuffleView extends Component {
             <></>
           )}
         </View>
-        <Text>isRunning:{this.state.isRunning.toString()}</Text>
-        <Text>length:{this.state.numbers.length.toString()}</Text>
       </View>
     );
   }

@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { Dimensions, StyleSheet, Text, View } from "react-native";
+import {
+  Dimensions,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { PanGestureHandler } from "react-native-gesture-handler";
 import Animated, { Extrapolate, interpolate } from "react-native-reanimated";
 import {
@@ -7,7 +13,7 @@ import {
   usePanGestureHandler,
   withDecay,
 } from "react-native-redash";
-import Cards, { Card as CARDS } from "../AppManagement/Cards";
+
 import { CARD_WIDTH } from "../AppManagement/Config";
 import Card from "./Card";
 
@@ -35,16 +41,18 @@ const Slider = (props: any) => {
     -(props.Cards.length * CARDWIDTH),
     0
   );
+
   return (
     <>
       <View
+        style={{ height: 100 }}
         onLayout={({
           nativeEvent: {
             layout: { height: h },
           },
         }) => setContainertHeight(h)}
       >
-        <PanGestureHandler {...gestureHandler} minDeltaX={-1000}>
+        <PanGestureHandler {...gestureHandler}>
           <Animated.View style={{ flexDirection: "row" }}>
             {props.Cards.map((card, index) => {
               const translateX = interpolate(x, {
@@ -54,12 +62,18 @@ const Slider = (props: any) => {
               });
               /*Cambio en MAC */
               /*Cambio en windows */
+              const zIndex = index * 10;
               return (
                 <Animated.View
                   key={card.value}
-                  style={[styles.card, { transform: [{ translateX }] }]}
+                  style={[
+                    styles.card,
+                    { transform: [{ translateX: translateX }], zIndex },
+                  ]}
                 >
-                  <Card {...card} />
+                  <TouchableOpacity onPress={() => props.onPressCard(card)}>
+                    <Card {...card} />
+                  </TouchableOpacity>
                 </Animated.View>
               );
             })}

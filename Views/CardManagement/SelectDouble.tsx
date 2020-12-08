@@ -6,6 +6,8 @@ import {
   TouchableOpacity as Button,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import Cards, { Card } from "../AppManagement/Cards";
+import Slider from "../Components/Slider";
 
 export default class SelectDouble extends Component {
   state = { card: this.props.route.params.card };
@@ -15,10 +17,19 @@ export default class SelectDouble extends Component {
     this.setState({ card: newArray });
   };
 
+  onPressCard = (card: Card) => {
+    this.selectDouble(card.value);
+    this.props.navigation.navigate("CardManagerScreen.SaveOrEdit", {
+      card: this.state.card,
+    });
+  };
+
   render() {
     return (
       <>
-        <View>
+        <View style={{ flexDirection: "column", flex: 1 }}>
+          <View>
+            {/*
           <ScrollView>
             <Button onPress={() => this.selectDouble("1")}>
               <Text>1</Text>
@@ -44,17 +55,10 @@ export default class SelectDouble extends Component {
             <Button onPress={() => this.selectDouble("9")}>
               <Text>9</Text>
             </Button>
-          </ScrollView>
+        </ScrollView>*/}
+            <Slider Cards={Cards} onPressCard={this.onPressCard} />
+          </View>
         </View>
-        <Button
-          onPress={() => {
-            this.props.navigation.navigate("CardManagerScreen.SaveOrEdit", {
-              card: this.state.card,
-            });
-          }}
-        >
-          <Text>NEXT</Text>
-        </Button>
       </>
     );
   }

@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { Text, StyleSheet, View } from "react-native";
+import { Text, StyleSheet, View, Image } from "react-native";
+import Cards from "../AppManagement/Cards";
 
 export default class HeroCard extends Component {
   render() {
     return (
-      <View>
-        <Text style={styles.heroNumber}>{this.props.currentCard}</Text>
+      <View style={{ alignItems: "center", margin: 10 }}>
+        <Image source={Cards[this.props.currentCard].img} />
       </View>
     );
   }
@@ -15,7 +16,6 @@ const styles = StyleSheet.create({
   heroNumber: {
     fontSize: 70,
     fontWeight: "bold",
-    margin: 100,
-    textAlign: "center",
+    margin: 10,
   },
 });

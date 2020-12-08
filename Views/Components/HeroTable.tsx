@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Text, StyleSheet, View } from "react-native";
+import { Text, StyleSheet, View, Image } from "react-native";
+import Cards from "../AppManagement/Cards";
 
 class HeroTable extends Component {
   render() {
@@ -13,11 +14,11 @@ class HeroTable extends Component {
         >
           <View
             style={{
-              padding: "10%",
+              paddingHorizontal: "10%",
               flex: 1,
               flexDirection: "row",
               flexWrap: "wrap",
-              backgroundColor: "skyblue",
+
               justifyContent: "center",
             }}
           >
@@ -27,7 +28,10 @@ class HeroTable extends Component {
                   item.toString() == "0" ? styles.card : styles.cardHighlight
                 }
               >
-                <Text style={{ fontSize: 20 }}>{item}</Text>
+                <Image
+                  source={Cards[item].img}
+                  style={{ height: 100, width: 60 }}
+                />
               </View>
             ))}
           </View>
@@ -57,6 +61,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "white",
+    backgroundColor: "black",
   },
 });

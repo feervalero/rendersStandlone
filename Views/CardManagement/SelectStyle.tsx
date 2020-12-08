@@ -6,11 +6,12 @@ import {
   Picker,
   TouchableOpacity as Button,
 } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import HeroTable from "../Components/HeroTable";
 
 export default class SelectStyle extends Component {
   state = {
+    selector: 0,
     cards: [
       {
         cardName: "Esquina Izquierda",
@@ -55,16 +56,54 @@ export default class SelectStyle extends Component {
   };
 
   render() {
+    const currentCard = this.state.cards[this.state.selector].cardArray;
+
     return (
       <View style={{ flex: 1, flexDirection: "column" }}>
-        <View style={{}}>
-          <ScrollView horizontal={true}>
+        <View
+          style={{
+            flexDirection: "row",
+            paddingHorizontal: 25,
+            paddingVertical: 15,
+          }}
+        >
+          {/*<ScrollView horizontal={true}>
             {this.state.cards.map((card) => (
               <Button style={styles.button} onPress={() => this.selector(card)}>
                 <Text>{card.cardName}</Text>
               </Button>
             ))}
-          </ScrollView>
+          </ScrollView>*/}
+          <View style={styles.arrowContainer}>
+            <TouchableOpacity
+              onPress={() => {
+                this.setState({ selector: this.state.selector - 1 }); //TODO: revisar el limite del array
+              }}
+            >
+              <Text style={styles.arrow}>{`<`}</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={{ flex: 1 }}>
+            <Text
+              style={{
+                fontSize: 30,
+                fontFamily: "HelveticaNeue-Bold",
+                fontWeight: "bold",
+                textAlign: "center",
+              }}
+            >
+              {this.state.cards[this.state.selector].cardName}
+            </Text>
+          </View>
+          <View style={styles.arrowContainer}>
+            <TouchableOpacity
+              onPress={() => {
+                this.setState({ selector: this.state.selector + 1 }); //TODO: revisar el limite del array
+              }}
+            >
+              <Text style={styles.arrow}>{`>`}</Text>
+            </TouchableOpacity>
+          </View>
         </View>
         {/*<Picker
         
@@ -75,7 +114,7 @@ export default class SelectStyle extends Component {
           <Picker.Item label="fer 2" value="fer2" />
         </Picker>*/}
         <View style={{ flex: 1 }}>
-          <HeroTable card={this.state.selectedCard.cardArray} />
+          <HeroTable card={currentCard} />
         </View>
         <View style={{}}>
           <Button
@@ -86,7 +125,7 @@ export default class SelectStyle extends Component {
               });
             }}
           >
-            <Text>Next</Text>
+            <Text style={styles.buttonText}>Siguiente</Text>
           </Button>
         </View>
       </View>
@@ -97,9 +136,23 @@ export default class SelectStyle extends Component {
 const styles = StyleSheet.create({
   button: {
     padding: 20,
-    width: 260,
-    borderWidth: 1,
-    borderColor: "black",
-    margin: 10,
+    backgroundColor: "black",
+    borderRadius: 20,
+    margin: 15,
+    justifyContent: "center",
+  },
+  buttonText: {
+    fontFamily: "HelveticaNeue-Bold",
+    fontSize: 30,
+    textAlign: "center",
+    color: "white",
+  },
+  arrow: {
+    fontSize: 40,
+    fontFamily: "Optima", //TODO CAMBIAR EL FONT pagina https://github.com/react-native-training/react-native-fonts
+    lineHeight: 40,
+  },
+  arrowContainer: {
+    marginHorizontal: 5,
   },
 });
