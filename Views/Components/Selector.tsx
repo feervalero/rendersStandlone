@@ -43,7 +43,7 @@ export default class Selector extends Component {
     cursor: [0],
   };
 
-  constructor(props) {
+  constructor(props: any) {
     super(props);
 
     this.state.Xpos = new Animated.Value(0);
@@ -110,7 +110,6 @@ export default class Selector extends Component {
           <View style={styles.aThirdCard}>
             <Text>{this.state.cards[3].number}</Text>
           </View>
-          0
           <View style={styles.aSecondCard}>
             <Text>{this.state.cards[4].number}</Text>
           </View>

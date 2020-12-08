@@ -1,15 +1,16 @@
-class Card {
+export class Card {
   name: string;
-  value: any;
-  img: any;
-  constructor() {
+  value: number;
+  img: string;
+  constructor(name: string, value: number, img: string) {
     this.name = name;
     this.value = value;
     this.img = img;
   }
 }
 
-var Cards: Card = [
+var Cards: Card[] = [
+  { name: "La rana", value: 99, img: require("../../assets/Cards/0.jpg") },
   { name: "El gallo", value: 1, img: require("../../assets/Cards/1.jpg") },
   { name: "El diablo", value: 2, img: require("../../assets/Cards/2.jpg") },
   { name: "La dama", value: 3, img: require("../../assets/Cards/3.jpg") },

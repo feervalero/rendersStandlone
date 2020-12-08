@@ -60,7 +60,7 @@ const Gestures = () => {
             /*Cambio en windows */
             return (
               <Animated.View
-                key={card.id}
+                key={card.value}
                 style={[styles.card, { transform: [{ translateX }] }]}
               >
                 <Card {...card} />

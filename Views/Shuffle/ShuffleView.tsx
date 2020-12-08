@@ -3,7 +3,9 @@ import { Text, StyleSheet, View } from "react-native";
 import Carrousel from "../Components/Carrousel";
 import HeroCard from "../Components/HeroCard";
 import { TouchableOpacity as Button } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+
+import Slider from "../Components/Slider";
+import Cards, { Card } from "../AppManagement/Cards";
 export default class ShuffleView extends Component {
   state = {
     currentCard: 99,
@@ -50,13 +52,12 @@ export default class ShuffleView extends Component {
           this.state.numbers.push(randomNumber);
           this.setState({ currentCard: randomNumber });
           var newArr = this.state.usedCards;
-          newArr.push(randomNumber);
+          newArr.push(Cards[randomNumber]);
 
           this.setState({ usedCards: newArr });
           this.nextNumber();
         } else {
           if (this.state.numbers.length === 53) {
-            console.log("llegue aqui with" + this.state.numbers.length);
             this.setState({ buttonStyle: { display: "none" } });
             this.setState({ cardNumber: "" });
             this.setState({ isRunning: false });
@@ -66,14 +67,17 @@ export default class ShuffleView extends Component {
         }
         this.setState({ toggle: !this.state.toggle });
       }
-    }, 1000);
+    }, 2000);
   };
 
   ///#endregion
   render() {
     return (
       <View>
-        <Carrousel cardHistory={this.state.usedCards} />
+        <View>
+          <Slider Cards={this.state.usedCards} />
+        </View>
+        {/*<Carrousel cardHistory={this.state.usedCards} />*/}
         <View>
           <HeroCard currentCard={this.state.currentCard} />
         </View>
