@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, Button, SafeAreaView } from "react-native";
 import ViewList from "./ViewList";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -23,40 +23,47 @@ export default function App({ navigation }) {
   }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home">
-          {(props) => <Home {...props} />}
-        </Stack.Screen>
-        <Stack.Screen name="CardManagerScreen.View">
-          {(props) => <CardManagerView {...props} />}
-        </Stack.Screen>
-        <Stack.Screen name="CardManagerScreen.Style">
-          {(props) => <SelectStyle {...props} />}
-        </Stack.Screen>
-        <Stack.Screen name="CardManagerScreen.SelectDouble">
-          {(props) => <SelectDouble {...props} />}
-        </Stack.Screen>
-        <Stack.Screen name="CardManagerScreen.SaveOrEdit">
-          {(props) => <SaveOrEdit {...props} />}
-        </Stack.Screen>
-        <Stack.Screen name="Play.Selector">
-          {(props) => <TableSelector {...props} />}
-        </Stack.Screen>
-        <Stack.Screen name="Play.View">
-          {(props) => <PlayView {...props} />}
-        </Stack.Screen>
-        <Stack.Screen name="Play.Win">
-          {(props) => <WinView {...props} />}
-        </Stack.Screen>
-        <Stack.Screen name="Gestures">
-          {(props) => <Gestures {...props} />}
-        </Stack.Screen>
-        <Stack.Screen name="ShuffleScreen">
-          {(props) => <ShuffleView {...props} />}
-        </Stack.Screen>
-      </Stack.Navigator>
-    </NavigationContainer>
+    <SafeAreaView style={{ flex: 1 }}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Home"
+            options={{
+              headerShown: false,
+            }}
+          >
+            {(props) => <Home {...props} />}
+          </Stack.Screen>
+          <Stack.Screen name="CardManagerScreen.View">
+            {(props) => <CardManagerView {...props} />}
+          </Stack.Screen>
+          <Stack.Screen name="CardManagerScreen.Style">
+            {(props) => <SelectStyle {...props} />}
+          </Stack.Screen>
+          <Stack.Screen name="CardManagerScreen.SelectDouble">
+            {(props) => <SelectDouble {...props} />}
+          </Stack.Screen>
+          <Stack.Screen name="CardManagerScreen.SaveOrEdit">
+            {(props) => <SaveOrEdit {...props} />}
+          </Stack.Screen>
+          <Stack.Screen name="Play.Selector">
+            {(props) => <TableSelector {...props} />}
+          </Stack.Screen>
+          <Stack.Screen name="Play.View">
+            {(props) => <PlayView {...props} />}
+          </Stack.Screen>
+          <Stack.Screen name="Play.Win">
+            {(props) => <WinView {...props} />}
+          </Stack.Screen>
+          <Stack.Screen name="Gestures">
+            {(props) => <Gestures {...props} />}
+          </Stack.Screen>
+          <Stack.Screen name="ShuffleScreen">
+            {(props) => <ShuffleView {...props} />}
+          </Stack.Screen>
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaView>
   );
 }
 
