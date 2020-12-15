@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Text, StyleSheet, View, AsyncStorage } from "react-native";
-import Cards from "../AppManagement/Cards";
+import Cards, { Card } from "../AppManagement/Cards";
 import Selector from "../Components/Selector";
 import TableSlider from "../Components/TableSlider";
 
@@ -18,11 +18,18 @@ export default class TableSelector extends Component {
     } catch (error) {}
   };
 
+  onPressCard = (card: Card) => {
+    console.log("click");
+  };
+
   render() {
     return (
       <View>
         <Text>Select you tables:</Text>
-        <TableSlider tables={this.state.tables} />
+        <TableSlider
+          tables={this.state.tables}
+          onPressCard={this.onPressCard}
+        />
         {/*<Selector />*/}
       </View>
     );

@@ -45,7 +45,7 @@ const TableSlider = (props: any) => {
     -CARD_WIDTH * props.tables.length - 2,
     0
   );
-  console.log(-(CARD_WIDTH + MARGIN * 2 + PADDING) * props.tables.length);
+  console.log(props);
   return (
     <>
       <View
