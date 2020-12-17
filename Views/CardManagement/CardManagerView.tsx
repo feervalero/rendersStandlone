@@ -9,6 +9,7 @@ import {
 import TableSlider from "../Components/TableSlider";
 import { FlatList, ScrollView } from "react-native-gesture-handler";
 import { Card } from "../AppManagement/Cards";
+import { Styles } from "../AppManagement/Styles";
 
 class CardManagerView extends Component {
   state = {
@@ -74,48 +75,26 @@ class CardManagerView extends Component {
     if (this.state.myCards) {
       return (
         <>
-          <View>
-            <Text> Select your card from {this.state.myCards.length}</Text>
-          </View>
-          <TableSlider
-            tables={this.state.tables}
-            onPressCard={this.onPressCard}
-          />
-          <View>
-            {
-              <ScrollView horizontal={true}>
-                {this.state.myCards.map((item) => (
-                  <View
-                    style={{
-                      margin: 5,
-                      padding: 5,
-                      borderLeftColor: "black",
-                      borderLeftWidth: 2,
-                    }}
-                  >
-                    <Text>{item.name}</Text>
-                  </View>
-                ))}
-              </ScrollView>
-            }
-          </View>
-          <View>
-            <Button
-              style={styles.button}
-              onPress={() => {
-                this.props.navigation.navigate("CardManagerScreen.Style");
-              }}
-            >
-              <Text>Crear Nueva</Text>
-            </Button>
-          </View>
-          <View>
-            <Button style={styles.button}>
-              <Text>Editar</Text>
-            </Button>
-            <Button style={styles.button}>
-              <Text>Borrar</Text>
-            </Button>
+          <View style={{ flex: 1, flexDirection: "column" }}>
+            <View>
+              <Text> Select your card from {this.state.myCards.length}</Text>
+            </View>
+            <View style={{ flexGrow: 1 }}>
+              <TableSlider
+                tables={this.state.tables}
+                onPressCard={this.onPressCard}
+              />
+            </View>
+            <View>
+              <Button
+                style={Styles.button}
+                onPress={() => {
+                  this.props.navigation.navigate("CardManagerScreen.Style");
+                }}
+              >
+                <Text style={Styles.button_text}>New</Text>
+              </Button>
+            </View>
           </View>
         </>
       );
@@ -126,12 +105,3 @@ class CardManagerView extends Component {
 }
 
 export default CardManagerView;
-
-const styles = StyleSheet.create({
-  button: {
-    padding: 20,
-    borderWidth: 1,
-    borderColor: "black",
-    margin: 10,
-  },
-});

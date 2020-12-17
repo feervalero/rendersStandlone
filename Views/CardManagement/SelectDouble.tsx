@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Cards, { Card } from "../AppManagement/Cards";
-import Slider from "../Components/Slider";
+import Slider2 from "../Components/Slider2";
 
 export default class SelectDouble extends Component {
   state = { card: this.props.route.params.card };
@@ -56,7 +56,7 @@ export default class SelectDouble extends Component {
               <Text>9</Text>
             </Button>
         </ScrollView>*/}
-            <Slider Cards={Cards} onPressCard={this.onPressCard} />
+            <Slider2 Cards={Cards} onPressCard={this.onPressCard} />
           </View>
         </View>
       </>

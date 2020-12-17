@@ -6,7 +6,6 @@ import { CARDWIDTH, RATIO, SCREEN_WIDTH } from "../AppManagement/Config";
 const width = Math.floor(CARDWIDTH);
 const height = Math.floor(width * RATIO);
 export default function CardThumbnail(props: any) {
-  console.log(props);
   return (
     <>
       <View
@@ -18,6 +17,7 @@ export default function CardThumbnail(props: any) {
       >
         {props.cards.map((item) => (
           <View
+            key={item}
             style={{
               width: CARDWIDTH / 4 - 1, //TODO:ajustar esto, camia el 1 por 3
               height: (CARDWIDTH / 4) * RATIO,

@@ -18,6 +18,7 @@ import {
 import Cards from "../AppManagement/Cards";
 
 import { CARDWIDTH as CARD_WIDTH } from "../AppManagement/Config";
+import { Styles } from "../AppManagement/Styles";
 import Card from "./Card";
 import CardThumbnail from "./CardThumbnail";
 
@@ -45,7 +46,7 @@ const TableSlider = (props: any) => {
     -CARD_WIDTH * props.tables.length - 2,
     0
   );
-  console.log(props);
+
   return (
     <>
       <View
@@ -77,6 +78,21 @@ const TableSlider = (props: any) => {
                   >
                     <CardThumbnail {...card} />
                   </TouchableOpacity>
+                  <View>
+                    <View style={{ flexDirection: "row" }}>
+                      <TouchableOpacity style={Styles.button_xs}>
+                        <Text style={Styles.button_text_xs}>Editar</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity style={Styles.button_xs}>
+                        <Text style={Styles.button_text_xs}>Borrar</Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                  <View>
+                    <Text style={{ padding: 5, textAlign: "center" }}>
+                      {card.name}
+                    </Text>
+                  </View>
                 </Animated.View>
               );
             })}
