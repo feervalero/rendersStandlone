@@ -22,4 +22,4 @@ export function getpostion(cards: Card[], item: Card) {
   return cards.indexOf(item);
 }
 
-export function getColumn(cards: Card[], item: Card) {}
+export function getColumn(cards: Card[], item: Card) { }
