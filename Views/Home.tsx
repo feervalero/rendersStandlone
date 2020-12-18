@@ -95,6 +95,12 @@ export default class Home extends Component {
           }}
           title="Gestures"
         />
+        <Button
+          onPress={() => {
+            this.props.navigation.navigate("Test.GridSort");
+          }}
+          title="GridSort"
+        />
       </View>
     );
   }

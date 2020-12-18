@@ -14,6 +14,7 @@ import TableSelector from "./Views/Play/TableSelector";
 import PlayView from "./Views/Play/PlayView";
 import WinView from "./Views/Play/WinView";
 import Gestures from "./Views/AppManagement/Gestures";
+import GridSort from "./Views/Screens/GridSort";
 
 const Stack = createStackNavigator();
 
@@ -60,6 +61,9 @@ export default function App({ navigation }) {
           </Stack.Screen>
           <Stack.Screen name="ShuffleScreen">
             {(props) => <ShuffleView {...props} />}
+          </Stack.Screen>
+          <Stack.Screen name="Test.GridSort">
+            {(props) => <GridSort {...props} />}
           </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
