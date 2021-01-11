@@ -73,6 +73,7 @@ var Cards: Card[] = [
   { name: "La maceta", value: 52, img: require("../../assets/Cards/52.jpg") },
   { name: "El arpa", value: 53, img: require("../../assets/Cards/53.jpg") },
   { name: "La rana", value: 54, img: require("../../assets/Cards/54.jpg") },
+  { name: "Fin", value: 55, img: require("../../assets/Cards/99.jpg") },
 ];
 
 export default Cards;

@@ -14,12 +14,16 @@ import {
   withDecay,
 } from "react-native-redash";
 
-import { CARD_WIDTH } from "../AppManagement/Config";
+import {
+  CARD_WIDTH,
+  MARGIN,
+  PADDING,
+  RATIO,
+  SLIDERHEIGHT,
+} from "../AppManagement/Config";
 import Card from "./Card";
 
 const { height, width } = Dimensions.get("window");
-const MARGIN = 10;
-const PADDING = 10;
 
 const CARDWIDTH = CARD_WIDTH;
 
@@ -45,7 +49,7 @@ const Slider = (props: any) => {
   return (
     <>
       <View
-        style={{ height: 100 }}
+        style={{ flex: 1 }}
         onLayout={({
           nativeEvent: {
             layout: { height: h },
@@ -57,7 +61,7 @@ const Slider = (props: any) => {
             {props.Cards.map((card, index) => {
               const translateX = interpolate(x, {
                 inputRange: [-CARDWIDTH * index, 0],
-                outputRange: [-(CARDWIDTH + 40) * index, 0],
+                outputRange: [-CARDWIDTH * index, 0],
                 extrapolate: Extrapolate.CLAMP,
               });
               /*Cambio en MAC */
@@ -87,12 +91,12 @@ const Slider = (props: any) => {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: "white",
-    padding: PADDING,
     margin: MARGIN,
-    width: CARD_WIDTH + MARGIN + PADDING,
+    padding: PADDING - 2,
+    width: SLIDERHEIGHT / RATIO + PADDING + MARGIN - 2,
     borderColor: "gray",
     borderWidth: 1,
-    borderRadius: 15,
+    borderRadius: PADDING - 2,
   },
 });
 

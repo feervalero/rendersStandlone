@@ -1,17 +1,19 @@
-import { StyleSheet } from "react-native";
-import { SCREEN_WIDTH } from "./Config";
+import { Platform, StyleSheet } from "react-native";
+import { MARGIN, SCREEN_WIDTH } from "./Config";
 
 const styles = StyleSheet.create({
   button: {
     paddingHorizontal: 20,
     paddingVertical: 10,
-    backgroundColor: "black",
-    borderRadius: 20,
+    backgroundColor: "#22BD6A",
+    borderRadius: MARGIN,
     margin: 10,
     justifyContent: "center",
   },
   button_text: {
-    fontFamily: "HelveticaNeue-Bold",
+    fontFamily:
+      Platform.OS == "android" ? "sans-serif-condensed" : "HelveticaNeue-Bold",
+    fontWeight: "bold",
     fontSize: 30,
     textAlign: "center",
     color: "white",
@@ -27,10 +29,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   button_text_xs: {
-    fontFamily: "HelveticaNeue-Bold",
+    fontFamily: Platform.OS == "android" ? "Roboto" : "HelveticaNeue-Bold",
     fontSize: 15,
     textAlign: "center",
     color: "white",
+  },
+  backgroundColor: {
+    backgroundColor: "#85D8F0",
   },
 });
 

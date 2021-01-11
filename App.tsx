@@ -15,6 +15,7 @@ import PlayView from "./Views/Play/PlayView";
 import WinView from "./Views/Play/WinView";
 import Gestures from "./Views/AppManagement/Gestures";
 import GridSort from "./Views/Screens/GridSort";
+import { Styles } from "./Views/AppManagement/Styles";
 
 const Stack = createStackNavigator();
 
@@ -24,7 +25,7 @@ export default function App({ navigation }) {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={[{ flex: 1 }, Styles.backgroundColor]}>
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
@@ -59,7 +60,12 @@ export default function App({ navigation }) {
           <Stack.Screen name="Gestures">
             {(props) => <Gestures {...props} />}
           </Stack.Screen>
-          <Stack.Screen name="ShuffleScreen">
+          <Stack.Screen
+            name="ShuffleScreen"
+            options={{
+              headerShown: false,
+            }}
+          >
             {(props) => <ShuffleView {...props} />}
           </Stack.Screen>
           <Stack.Screen name="Test.GridSort">
