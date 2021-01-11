@@ -1,5 +1,8 @@
 import { Platform, StyleSheet } from "react-native";
 import { MARGIN, SCREEN_WIDTH } from "./Config";
+import { useFonts } from "expo-font";
+
+
 
 const styles = StyleSheet.create({
   button: {
@@ -37,6 +40,9 @@ const styles = StyleSheet.create({
   backgroundColor: {
     backgroundColor: "#85D8F0",
   },
+  title: {
+    fontFamily: "Lapsus"
+  }
 });
 
 export { styles as Styles };

@@ -16,6 +16,7 @@ import WinView from "./Views/Play/WinView";
 import Gestures from "./Views/AppManagement/Gestures";
 import GridSort from "./Views/Screens/GridSort";
 import { Styles } from "./Views/AppManagement/Styles";
+import Font from "./Views/Components/Font";
 
 const Stack = createStackNavigator();
 
@@ -24,8 +25,9 @@ export default function App({ navigation }) {
     alert("hola FEr");
   }
 
-  return (
-    <SafeAreaView style={[{ flex: 1 }, Styles.backgroundColor]}>
+  return (<>
+    <Font />
+    < SafeAreaView style={[{ flex: 1 }, Styles.backgroundColor]} >
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
@@ -73,9 +75,11 @@ export default function App({ navigation }) {
           </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
-    </SafeAreaView>
+    </SafeAreaView >
+  </>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {

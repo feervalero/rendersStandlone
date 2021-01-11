@@ -12,10 +12,18 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Styles } from "./AppManagement/Styles";
 import { AntDesign } from "@expo/vector-icons";
+
 const { height } = Dimensions.get("window");
+
+
 export default class Home extends Component {
+
   render() {
+
+
+
     return (
+
       <SafeAreaView style={[{ flex: 1 }, Styles.backgroundColor]}>
         <View style={{ flex: 1 }}>
           {/*<Button
@@ -72,7 +80,7 @@ export default class Home extends Component {
                 style={styles.image}
                 imageStyle={[styles.image, { borderRadius: 20 }]}
               >
-                <Text style={styles.text}>Tablas</Text>
+                <Text style={[styles.text, Styles.title]}>Tablas</Text>
               </ImageBackground>
             </TouchableOpacity>
           </View>
