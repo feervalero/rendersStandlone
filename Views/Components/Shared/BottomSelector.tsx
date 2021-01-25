@@ -13,7 +13,7 @@ const BottomSelector = (props: any) => {
                     {props.tables.map(table => (<TouchableOpacity onPress={() => props.removeItem(table)}><Image source={Cards[table.double].img} style={styles.image} /></TouchableOpacity>))}
                 </ImageBackground>
             </View>
-            <View style={{ height: 45, backgroundColor: "#4D1A88", justifyContent: "center", width: SCREEN_WIDTH }}><TouchableOpacity style={{}}><Text style={{
+            <View style={{ height: 45, backgroundColor: "#4D1A88", justifyContent: "center", width: SCREEN_WIDTH }}><TouchableOpacity onPress={() => props.props.navigation.navigate("Play.View", { tablesSelected: props.tables })} style={{}}><Text style={{
                 fontSize: 30, fontFamily: "Lapsus", color: "white", shadowOpacity: 1,
                 shadowRadius: 5,
                 shadowOffset: { height: 1, width: 1 },

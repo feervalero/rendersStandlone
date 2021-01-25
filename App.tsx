@@ -64,7 +64,9 @@ export default function App({ navigation }) {
             }}>
               {(props) => <TableSelector {...props} />}
             </Stack.Screen>
-            <Stack.Screen name="Play.View">
+            <Stack.Screen name="Play.View" options={{
+              headerShown: false,
+            }}>
               {(props) => <PlayView {...props} />}
             </Stack.Screen>
             <Stack.Screen name="Play.Win">

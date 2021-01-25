@@ -61,7 +61,7 @@ export default class TableSelector extends Component {
               onPressCard={this.onPressCard} />
           </ScrollView>
         </View>
-        {(this.state.selectedTables.length > 0) ? <BottomSelector tables={this.state.selectedTables} removeItem={this.removeItem} /> : <></>}
+        {(this.state.selectedTables.length > 0) ? <BottomSelector {...this} tables={this.state.selectedTables} removeItem={this.removeItem} /> : <></>}
       </View>
     );
   }
