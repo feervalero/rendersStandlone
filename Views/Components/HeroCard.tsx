@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, StyleSheet, View, Image } from "react-native";
+import { StyleSheet, View, Image } from "react-native";
 import Cards from "../AppManagement/Cards";
 import { PADDING } from "../AppManagement/Config";
 

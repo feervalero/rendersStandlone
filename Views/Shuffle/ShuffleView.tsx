@@ -5,14 +5,14 @@ import {
   View,
   SafeAreaView,
   Platform,
-  Dimensions,
-  Animated,
-  Easing,
   Modal,
+  Animated,
+  Image,
+  Easing,
+  Dimensions
 } from "react-native";
 import HeroCard from "../Components/HeroCard";
 import { TouchableOpacity as Button } from "react-native";
-import { Slider as MySlider } from "react-native";
 import Slider from "../Components/Slider";
 import Cards, { Card } from "../AppManagement/Cards";
 import {
@@ -22,21 +22,56 @@ import {
   SCREEN_WIDTH,
   SLIDERHEIGHT,
 } from "../AppManagement/Config";
+
 import { Styles } from "../AppManagement/Styles";
-import LottieView from "lottie-react-native";
-import { AntDesign, Ionicons } from "@expo/vector-icons";
-import {
-  TouchableHighlight,
-  TouchableOpacity,
-} from "react-native-gesture-handler";
+
+import { AntDesign } from "@expo/vector-icons";
+
 import ClockItem from "../Components/ClockItem";
+import ShuffleBack from "../Components/ShuffleBack";
+import { State, TouchableOpacity } from "react-native-gesture-handler";
+import BottomMenu from "../Components/Shared/BottomMenu";
+
+
+
+const width = Dimensions.get("screen").width;
+const height = Dimensions.get("window").height;
 
 const sleep = (milliseconds: number) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 };
 var isRunning = false;
 
+
+
 export default class ShuffleView extends Component {
+
+  _state = new Animated.Value(State.UNDETERMINED);
+  translateX = new Animated.Value(0);
+  translateY = new Animated.Value(0);
+  _onGestureEvent = new Animated.Value(0);
+  constructor(props: any) {
+    super(props);
+    this.translateX = new Animated.Value(0);
+    this._onGestureEvent = Animated.event(
+      [
+        {
+          nativeEvent: {
+            translationX: this.translateX,
+            translationY: this.translateY,
+            state: this._state
+          },
+        },
+      ],
+      { useNativeDriver: true }, this.init
+    );
+
+  }
+  init = () => {
+
+
+  }
+
   state = {
     currentCard: 0,
     isRunning: false,
@@ -47,6 +82,8 @@ export default class ShuffleView extends Component {
     second: 0,
     scalePortion: new Animated.Value(1),
     modal: false,
+    history: 0,
+    top: new Animated.Value(-185)
   };
 
   ///#region component did mount
@@ -98,7 +135,7 @@ export default class ShuffleView extends Component {
         newArr.push(Cards[randomNumber]);
 
         this.setState({ usedCards: newArr });
-        await sleep(100);
+        await sleep(2000);
         this.nextNumber();
       } else if (this.state.numbers.length < 53) {
         this.nextNumber();
@@ -109,49 +146,37 @@ export default class ShuffleView extends Component {
       }
     }
 
-    /*if (this.state.isRunning == true) {
-      
-      console.log("primer if");
-      if (
-        this.state.numbers.indexOf(randomNumber) === -1 &&
-        this.state.numbers.length < 53
-      ) {
-        this.state.numbers.push(randomNumber);
-        this.setState({ currentCard: randomNumber });
-        var newArr = this.state.usedCards;
-        newArr.push(Cards[randomNumber]);
 
-        this.setState({ usedCards: newArr });
-        console.log("before");
-        setTimeout(() => {
-          this.nextNumber();
-        }, 1000);
-        console.log("after set");
-      } else {
-        if (this.state.numbers.length === 53) {
-          this.setState({ buttonStyle: { display: "none" } });
-          this.setState({ cardNumber: "" });
-          this.setState({ isRunning: false });
-          console.log("full");
-        } else {
-          this.nextNumber();
-          console.log("else");
-        }
-      }
-      this.setState({ toggle: !this.state.toggle });
-    }*/
   };
 
   clockPress = () => {
     this.setState({ modal: this.state.modal ? false : true });
   };
+
+  historyAnimation = () => {
+    this.setState({ history: this.state.history ? 0 : 1 })
+
+
+    Animated.timing(this.state.top, {
+      toValue: (this.state.history == 1) ? -185 : -43,
+      duration: 500,
+      easing: Easing.bounce,
+      useNativeDriver: false,
+    }).start();
+
+  }
+
   ///#endregion
   render() {
-    return (
-      <SafeAreaView style={[{ flex: 1 }, Styles.backgroundColor]}>
+
+    return (<>
+
+      <ShuffleBack currentCard={this.state.currentCard} />
+      <SafeAreaView style={[{ flex: 1, zIndex: 90, }]}>
         <View style={{ position: "absolute", top: 10, left: 10 }}>
-          <AntDesign name={"left"} size={24} />
+          <AntDesign name={"left"} size={24} color={"white"} />
         </View>
+
         <View>
           <Modal
             visible={this.state.modal}
@@ -179,16 +204,29 @@ export default class ShuffleView extends Component {
           style={{
             flexDirection: "column",
             flex: 1,
-            paddingTop: Platform.OS == "android" ? 25 : 0,
+            paddingTop: Platform.OS == "android" ? 25 : 0, marginBottom: 100
           }}
         >
-          <View
+          <Animated.View style={[Styles.topSlider, { bottom: -35 }]} >
+            <Text style={{ alignSelf: "center" }}>HISTORIAL</Text>
+            <AntDesign style={{ alignSelf: "center" }} name={"caretdown"} size={24} color={"black"} />
+          </Animated.View>
+          <Animated.View
             style={{
               height: SLIDERHEIGHT + (PADDING * 2 + MARGIN * 2),
+              backgroundColor: "red",
+              position: "realtive",
+              top: this.state.top
             }}
           >
             <Slider Cards={this.state.usedCards} />
-          </View>
+          </Animated.View>
+          <TouchableOpacity onPress={this.historyAnimation}>
+            <Animated.View style={[Styles.topSlider]} >
+              <Text style={{ alignSelf: "center" }}>HISTORIAL</Text>
+              <AntDesign style={{ alignSelf: "center" }} name={"caretdown"} size={24} color={"black"} />
+            </Animated.View>
+          </TouchableOpacity>
           <View style={{ flex: 1, flexGrow: 1 }}>
             <ClockItem clockPress={this.clockPress} />
             <HeroCard currentCard={this.state.currentCard} />
@@ -198,17 +236,14 @@ export default class ShuffleView extends Component {
               <>
                 <Button style={Styles.button} onPress={this.play}>
                   <Text style={Styles.button_text}>
-                    Start{" "}
-                    <AntDesign name={"playcircleo"} size={25} color={"white"} />
+                    Iniciar
                   </Text>
                 </Button>
-                <Button style={Styles.button}>
-                  <Text style={Styles.button_text}>Exit</Text>
-                </Button>
+
               </>
             ) : (
-              <></>
-            )}
+                <></>
+              )}
             {isRunning ? (
               <>
                 <Button style={Styles.button} onPress={this.pause}>
@@ -219,8 +254,8 @@ export default class ShuffleView extends Component {
                 </Button>
               </>
             ) : (
-              <></>
-            )}
+                <></>
+              )}
             {!isRunning && this.state.isOnPause ? (
               <>
                 <Button style={Styles.button} onPress={this.resume}>
@@ -231,11 +266,13 @@ export default class ShuffleView extends Component {
                 </Button>
               </>
             ) : (
-              <></>
-            )}
+                <></>
+              )}
           </View>
         </View>
+        <BottomMenu></BottomMenu>
       </SafeAreaView>
+    </>
     );
   }
 }
