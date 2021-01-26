@@ -69,7 +69,9 @@ export default function App({ navigation }) {
             }}>
               {(props) => <PlayView {...props} />}
             </Stack.Screen>
-            <Stack.Screen name="Play.Win">
+            <Stack.Screen name="Play.Win" options={{
+              headerShown: false,
+            }}>
               {(props) => <WinView {...props} />}
             </Stack.Screen>
             <Stack.Screen name="Gestures">

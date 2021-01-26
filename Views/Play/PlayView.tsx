@@ -8,12 +8,21 @@ import { Styles } from '../AppManagement/Styles';
 
 const CARDWIDTH = (SCREEN_WIDTH - 80 - 25) / 4;
 
+const winnerPlays = ["1111000000000000", "0000000000001111"];
+
 export default class PlayView extends Component {
 
-    state = { tablesSelected: [{ cards: [], double: 1 }], indicator: 0, scroll: "" }
+    state = { tablesSelected: [{ cards: [], double: 1 }], indicator: 0, scroll: "", play: [] }
     componentDidMount = () => {
         this.setState({ tablesSelected: this.props.route.params.tablesSelected });
-        console.log(SCREEN_WIDTH - 80)
+        var tables = this.props.route.params.tablesSelected;
+        var newArr = [];
+        for (let index = 0; index < tables.length; index++) {
+            newArr.push("0000000000000000");
+        }
+
+        this.setState({ play: newArr })
+
     }
 
     scrolled = (event: any) => {
@@ -28,9 +37,22 @@ export default class PlayView extends Component {
         });
         this.setState({ indicator: index })
     }
+    select = (tableIndex: any, cardIndex: any) => {
+        var table = Array.from(this.state.play[tableIndex]);
+        table.splice(cardIndex, 1, (table[cardIndex] === "1" ? "0" : "1"));
+        var newArr = this.state.play;
+        newArr.splice(tableIndex, 1, table.join(""));
+        this.setState({ play: newArr })
+        this.checkPlay(table.join(""));
+    }
+
+    checkPlay = (play: string) => {
+        if (winnerPlays.indexOf(play) != -1) {
+            this.props.navigation.navigate("Play.Win");
+        }
+    }
 
     render() {
-
         return (
             <View style={[Styles.viewContainer, { flex: 1 }]}>
                 <View style={[Styles.topBar]}>
@@ -51,7 +73,7 @@ export default class PlayView extends Component {
                 <View style={{ flex: 1, flexDirection: "row", alignItems: "stretch", }}>
                     <View style={{ width: 40, alignItems: "center", alignContent: "center", justifyContent: "center" }}><AntDesign name="left" size={25} color="white" /></View>
                     <ScrollView horizontal={true} pagingEnabled={true} onScrollEndDrag={this.scrolled} ref={(ref) => { this.setState({ scroll: ref }) }}>
-                        {this.state.tablesSelected.map(table => (
+                        {this.state.tablesSelected.map((table, tableIndex) => (
                             <View style={{
 
                                 backgroundColor: "#8437DD", borderRadius: 5, flexDirection: "row", flexWrap: "wrap", paddingTop: 5, width: SCREEN_WIDTH - 80, height: (SCREEN_WIDTH - 90) * RATIO, shadowColor: "#4D1A88",
@@ -59,7 +81,17 @@ export default class PlayView extends Component {
                                 shadowOpacity: 100,
                                 shadowOffset: { height: 2, width: 2 },
                             }}>
-                                {table.cards.map(card => (<View><Image source={Cards[card].img} style={{ width: CARDWIDTH, height: CARDWIDTH * RATIO, borderRadius: 5, marginStart: 5, marginBottom: 5 }} /></View>))}
+                                {table.cards.map((card, cardIndex) => (
+                                    <TouchableOpacity onPressIn={() => this.select(tableIndex, cardIndex)} activeOpacity={1}>
+                                        <View>
+                                            <Image
+                                                source={Cards[card].img}
+                                                style={{ width: CARDWIDTH, height: CARDWIDTH * RATIO, borderRadius: 5, marginStart: 5, marginBottom: 5 }}
+                                            />
+                                            <Image source={require("../../assets/ficha.png")} style={{ position: "absolute", marginLeft: 5, width: CARDWIDTH, height: CARDWIDTH, top: ((CARDWIDTH * RATIO) - CARDWIDTH) / 2, opacity: (this.state.play[tableIndex][cardIndex] == 1) ? 1 : 0 }} />
+                                        </View>
+                                    </TouchableOpacity>
+                                ))}
                             </View>
                         ))}
                     </ScrollView>
