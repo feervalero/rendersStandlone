@@ -1,5 +1,5 @@
 import { Dimensions, Platform, StyleSheet } from "react-native";
-import { MARGIN, SCREEN_WIDTH } from "./Config";
+import { MARGIN, SCREEN_WIDTH, topBar } from "./Config";
 import { useFonts } from "expo-font";
 
 const { width } = Dimensions.get("screen");
@@ -98,12 +98,37 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   topBar: {
-
-    height: 60,
+    backgroundColor: "#4D1A88",
+    height: topBar,
     flexDirection: "row",
     paddingHorizontal: 20,
     alignItems: "center"
+  },
+  font30: {
+    fontFamily: "Lapsus",
+    color: "white",
+    fontSize: 30,
+    textAlign: "center",
+    textShadowColor: "black",
+    textShadowRadius: 5
+  },
+  font30Black: {
+    fontFamily: "Lapsus",
+    color: "black",
+    fontSize: 30,
+    textAlign: "center",
+    opacity: .5,
+  },
+  font40: {
+    marginVertical: 10,
+    fontFamily: "Lapsus",
+    color: "white",
+    fontSize: 40,
+    textAlign: "center",
+    textShadowColor: "black",
+    textShadowRadius: 5
   }
+
 });
 
 export { styles as Styles };

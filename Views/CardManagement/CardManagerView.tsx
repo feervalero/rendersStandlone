@@ -3,13 +3,15 @@ import {
   Text,
   StyleSheet,
   View,
-  TouchableOpacity as Button,
+  TouchableOpacity,
   AsyncStorage,
 } from "react-native";
 import TableSlider from "../Components/TableSlider";
 import { FlatList, ScrollView } from "react-native-gesture-handler";
 import { Card } from "../AppManagement/Cards";
 import { Styles } from "../AppManagement/Styles";
+import TablesGrid from "../Components/Shared/TablesGrid";
+import { AntDesign } from "@expo/vector-icons";
 
 class CardManagerView extends Component {
   state = {
@@ -147,25 +149,29 @@ class CardManagerView extends Component {
     if (this.state.myCards) {
       return (
         <>
-          <View style={{ flex: 1, flexDirection: "column" }}>
-            <View>
-              <Text> Select your card from {this.state.myCards.length}</Text>
+          <View style={Styles.viewContainer}>
+            <View style={Styles.topBar}>
+              <View>
+                <TouchableOpacity onPress={() => { this.props.navigation.goBack() }}>
+                  <AntDesign name="left" size={25} color="white" />
+                </TouchableOpacity>
+              </View>
             </View>
-            <View style={{ flexGrow: 1 }}>
-              <TableSlider
-                tables={this.state.tables}
-                onPressCard={this.onPressCard}
-              />
+            <View style={{ flex: 1 }}>
+              <ScrollView>
+                <TablesGrid tables={this.state.tables}
+                  onPressCard={this.onPressCard} />
+              </ScrollView>
             </View>
-            <View>
-              <Button
-                style={Styles.button}
+            <View style={{ margin: 20 }}>
+              <TouchableOpacity
+                style={{ height: 40, borderWidth: 1, borderRadius: 5, borderColor: "white", justifyContent: "center", backgroundColor: "#FFA700" }}
                 onPress={() => {
-                  this.props.navigation.navigate("CardManagerScreen.Style");
+                  this.props.navigation.navigate("CardManagerScreen.SelectDouble");
                 }}
               >
-                <Text style={Styles.button_text}>New</Text>
-              </Button>
+                <Text style={{ fontSize: 30, color: "white", fontFamily: "Lapsus", textAlign: "center" }}>NUEVA TABLA</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </>

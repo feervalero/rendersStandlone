@@ -13,7 +13,10 @@ var _CARDHEIGHT = Math.floor(_CARDWIDTH * RATIO);
 var SLIDERHEIGHT = 100;
 const MARGIN = 10;
 const PADDING = 10;
-export { SCREEN_WIDTH, MARGIN, PADDING, SCREEN_HEIGHT };
+const topBar = 70;
+const banner = 60;
+const buttonRow = 60;
+export { SCREEN_WIDTH, MARGIN, PADDING, SCREEN_HEIGHT, topBar, banner, buttonRow };
 export { RATIO };
 export { CARD_WIDTH };
 export { CARD_WIDTH_5 };
@@ -26,4 +29,6 @@ export function getpostion(cards: Card[], item: Card) {
   return cards.indexOf(item);
 }
 
-export function getColumn(cards: Card[], item: Card) {}
+
+
+export function getColumn(cards: Card[], item: Card) { }

@@ -47,16 +47,24 @@ export default function App({ navigation }) {
             >
               {(props) => <Home {...props} />}
             </Stack.Screen>
-            <Stack.Screen name="CardManagerScreen.View">
+            <Stack.Screen name="CardManagerScreen.View" options={{
+              headerShown: false,
+            }}>
               {(props) => <CardManagerView {...props} />}
             </Stack.Screen>
-            <Stack.Screen name="CardManagerScreen.Style">
+            <Stack.Screen name="CardManagerScreen.Style" options={{
+              headerShown: false,
+            }}>
               {(props) => <SelectStyle {...props} />}
             </Stack.Screen>
-            <Stack.Screen name="CardManagerScreen.SelectDouble">
+            <Stack.Screen name="CardManagerScreen.SelectDouble" options={{
+              headerShown: false,
+            }}>
               {(props) => <SelectDouble {...props} />}
             </Stack.Screen>
-            <Stack.Screen name="CardManagerScreen.SaveOrEdit">
+            <Stack.Screen name="CardManagerScreen.SaveOrEdit" options={{
+              headerShown: false,
+            }}>
               {(props) => <SaveOrEdit {...props} />}
             </Stack.Screen>
             <Stack.Screen name="Play.Selector" options={{
