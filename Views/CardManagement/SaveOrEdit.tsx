@@ -6,6 +6,7 @@ import {
   View,
   TouchableOpacity,
   Image,
+  AsyncStorage,
 
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
@@ -22,13 +23,23 @@ export default class SaveOrEdit extends Component {
   state = {
     usedNumbers: [parseInt(this.props.route.params.selectedDouble)],
     table: [],
+    tables: []
   };
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
+    try {
+      const value = await AsyncStorage.getItem("Tables");
+      const data = JSON.parse(value);
 
+      if (value !== null) {
+        this.setState({ tables: data.tables });
+      } else {
+      }
+    } catch (error) { console.log(error) }
     for (let index = 0; index < 16; index++) {
       this.newUnusedRandom();
     }
+
   };
 
   componentDidUpdate = () => {
@@ -49,6 +60,27 @@ export default class SaveOrEdit extends Component {
   };
 
   save = () => {
+
+
+
+    var newTable = {
+      id: this.state.tables.length + 1,
+      name: "Doble " + Cards[this.props.route.params.selectedDouble - 1].name,
+      cards: this.state.table,
+      active: true,
+      cardType: 2, double: this.props.route.params.selectedDouble
+    };
+
+    var newArr = this.state.tables;
+    newArr.push(newTable);
+
+    AsyncStorage.removeItem("Tables");
+    AsyncStorage.setItem(
+      "Tables",
+      JSON.stringify({ tables: newArr }));
+
+    this.props.navigation.popToTop();
+
 
   };
   edit = () => { };
@@ -87,21 +119,21 @@ export default class SaveOrEdit extends Component {
                 shadowOpacity: 100,
                 shadowOffset: { height: 2, width: 2 },
               }}>
-                <HeroTable card={this.state.table} />
+                <HeroTable card={this.state.table} availableHeight={availableHeight} />
               </View>
 
             </View>
 
             <View style={{ height: buttonRow + buttonRow }}>
               <View style={{}}>
-                <TouchableOpacity style={{ borderRadius: 5, borderWidth: 1, borderColor: "white", margin: 10, height: 40, backgroundColor: "#4D1A88", alignItems: "center", justifyContent: "center" }} onPress={() => { props.navigation.goBack() }}>
+                <TouchableOpacity style={{ borderRadius: 5, borderWidth: 1, borderColor: "white", margin: 10, height: 40, backgroundColor: "#4D1A88", alignItems: "center", justifyContent: "center" }} onPress={this.save}>
                   <Text style={{ fontFamily: "Lapsus", fontSize: 20, color: "white" }}>GUARDAR</Text>
                 </TouchableOpacity>
               </View>
               <View style={{ flexDirection: "row", justifyContent: "space-around", flex: 1 }}>
 
                 <View style={{ borderRadius: 5, borderWidth: 1, borderColor: "white", backgroundColor: "#4D1A88", height: 40, flex: 1, margin: 10, justifyContent: "center" }}>
-                  <TouchableOpacity onPress={() => { props.navigation.goBack() }}>
+                  <TouchableOpacity onPressOut={() => this.newRandom()}>
                     <Text style={{ fontFamily: "Lapsus", fontSize: 20, color: "white", alignSelf: "center" }}>OTRA NUEVA</Text>
                   </TouchableOpacity>
                 </View>
@@ -134,6 +166,7 @@ export default class SaveOrEdit extends Component {
 
   newUnusedRandom = () => {
     var randomNumber = Math.floor(Math.random() * Math.floor(54) + 1);
+
     if (
       this.state.usedNumbers.indexOf(parseInt(randomNumber)) == -1 &&
       this.state.table.length < 16

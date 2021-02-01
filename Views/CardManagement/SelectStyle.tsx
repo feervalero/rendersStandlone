@@ -90,18 +90,20 @@ export default class SelectStyle extends Component {
           <View style={{ width: 40, alignItems: "center", alignContent: "center", justifyContent: "center" }}><AntDesign name="left" size={25} color="white" /></View>
           <ScrollView horizontal={true} pagingEnabled={true} onScrollEndDrag={this.scrolled} ref={(ref) => { this.setState({ scroll: ref }) }}>
             {this.state.cards.map((table, tableIndex) => (
-              <View style={{
+              <View
+                key={tableIndex}
+                style={{
 
-                borderRadius: 5, flexDirection: "row", flexWrap: "wrap", paddingTop: 5, width: SCREEN_WIDTH - 80, height: (SCREEN_WIDTH - 90) * RATIO, shadowColor: "#4D1A88",
-                elevation: 10,
-                shadowOpacity: 100,
-                shadowOffset: { height: 2, width: 2 },
-              }}>
+                  borderRadius: 5, flexDirection: "row", flexWrap: "wrap", paddingTop: 5, width: SCREEN_WIDTH - 80, height: (SCREEN_WIDTH - 90) * RATIO, shadowColor: "#4D1A88",
+                  elevation: 10,
+                  shadowOpacity: 100,
+                  shadowOffset: { height: 2, width: 2 },
+                }}>
                 {table.cardArray.map((card, cardIndex) => (
-                  <><TouchableOpacity onPressOut={() => {
+                  <><TouchableOpacity key={cardIndex} onPressOut={() => {
                     this.props.navigation.navigate("CardManagerScreen.SaveOrEdit", {
                       card: this.state.cards[this.state.indicator],
-                      selectedDouble: this.props.route.params.double,
+                      selectedDouble: this.props.route.params.double + 1,
                     })
                   }}>
                     <View>

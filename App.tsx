@@ -19,6 +19,7 @@ import { Styles } from "./Views/AppManagement/Styles";
 import Font from "./Views/Components/Font";
 import { useFonts } from "expo-font";
 import Animation from "./Views/Screens/Animation";
+import EditTable from "./Views/CardManagement/EditTable";
 const Stack = createStackNavigator();
 
 export default function App({ navigation }) {
@@ -71,6 +72,11 @@ export default function App({ navigation }) {
               headerShown: false,
             }}>
               {(props) => <TableSelector {...props} />}
+            </Stack.Screen>
+            <Stack.Screen name="EditTable" options={{
+              headerShown: false,
+            }}>
+              {(props) => <EditTable {...props} />}
             </Stack.Screen>
             <Stack.Screen name="Play.View" options={{
               headerShown: false,

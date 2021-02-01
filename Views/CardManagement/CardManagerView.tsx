@@ -143,9 +143,10 @@ class CardManagerView extends Component {
     } catch (error) { }
   };
   onPressCard = (card: Card) => {
-    console.log("click");
+    this.props.navigation.navigate("EditTable", { card: card })
   };
   render() {
+
     if (this.state.myCards) {
       return (
         <>
