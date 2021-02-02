@@ -3,16 +3,14 @@ import {
   Text,
   StyleSheet,
   View,
-  Button,
-  ImageBackground,
+
   Dimensions,
   Platform,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Styles } from "./AppManagement/Styles";
-import { AntDesign } from "@expo/vector-icons";
-import BottomMenu from "./Components/Shared/BottomMenu";
+
 
 const { height } = Dimensions.get("window");
 
@@ -68,7 +66,7 @@ export default class Home extends Component {
           </View>
 
         </View>
-        <BottomMenu />
+
       </SafeAreaView>
     );
   }

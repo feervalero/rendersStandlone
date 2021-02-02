@@ -27,7 +27,7 @@ const width2 = Math.floor(CARD_WIDTH_5);
 const height2 = Math.floor(CARD_WIDTH_5 * RATIO);
 const Slider2 = (props: any) => {
   const [containerHeight, setContainertHeight] = useState(height);
-  console.log(height2);
+
   const {
     gestureHandler,
     translation,

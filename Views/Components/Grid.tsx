@@ -35,7 +35,7 @@ export default function Grid(props) {
     state,
   } = usePanGestureHandler();
 
-  console.log(props.Cards.length);
+
   const translateY = diffClamp(
     withDecay({
       value: translation.y,

@@ -1,12 +1,9 @@
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
-import Cards from "../AppManagement/Cards";
+
 import {
-  CARD_WIDTH,
-  MARGIN,
-  PADDING,
   RATIO,
-  SCREEN_WIDTH,
+
   SLIDERHEIGHT,
 } from "../AppManagement/Config";
 

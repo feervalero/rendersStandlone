@@ -1,21 +1,40 @@
 import React, { Component } from "react";
 import {
   Text,
-  StyleSheet,
   View,
   TouchableOpacity,
-  AsyncStorage,
 } from "react-native";
-import TableSlider from "../Components/TableSlider";
-import { FlatList, ScrollView } from "react-native-gesture-handler";
+
+import { ScrollView } from "react-native-gesture-handler";
 import { Card } from "../AppManagement/Cards";
 import { Styles } from "../AppManagement/Styles";
 import TablesGrid from "../Components/Shared/TablesGrid";
 import { AntDesign } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 class CardManagerView extends Component {
   state = {
     tables: [],
+    myCards: []
+  };
+
+  constructor(props: any) {
+    super(props);
+    this.loadStuff();
+  }
+
+  loadStuff = async () => {
+    try {
+      const value = await AsyncStorage.getItem("Tables");
+      const data = JSON.parse(value);
+
+      if (value !== null) {
+        this.setState({ myCards: data.tables });
+        this.setState({ tables: data.tables });
+      } else {
+      }
+    } catch (error) { }
   };
 
   componentDidMount = async () => {
@@ -131,22 +150,12 @@ class CardManagerView extends Component {
         })
       );
   */
-    try {
-      const value = await AsyncStorage.getItem("Tables");
-      const data = JSON.parse(value);
 
-      if (value !== null) {
-        this.setState({ myCards: data.tables });
-        this.setState({ tables: data.tables });
-      } else {
-      }
-    } catch (error) { }
   };
   onPressCard = (card: Card) => {
     this.props.navigation.navigate("EditTable", { card: card })
   };
   render() {
-
     if (this.state.myCards) {
       return (
         <>

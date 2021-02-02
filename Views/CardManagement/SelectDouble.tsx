@@ -4,21 +4,14 @@ import {
   Text,
   StyleSheet,
   View,
-  TouchableOpacity as Button,
-  Image,
 } from "react-native";
-import { PanGestureHandler, ScrollView, TouchableOpacity } from "react-native-gesture-handler";
-import Animated, { add, cond, interpolate, set } from "react-native-reanimated";
-import { between, diffClamp, get, translate, usePanGestureHandler, withDecay, withOffset } from "react-native-redash";
+import { PanGestureHandler, TouchableOpacity } from "react-native-gesture-handler";
+import Animated, { add, interpolate } from "react-native-reanimated";
+import { diffClamp, usePanGestureHandler, withDecay } from "react-native-redash";
 import Cards from "../AppManagement/Cards";
-import { RATIO, SCREEN_WIDTH } from "../AppManagement/Config";
-
-
+import { SCREEN_WIDTH } from "../AppManagement/Config";
 import { Styles } from "../AppManagement/Styles";
-
 import SliderCard from "../Components/SliderCard";
-
-
 export default class SelectDouble extends Component {
   state = { double: [7] };
 
@@ -56,8 +49,6 @@ const Slider = (props: any) => {
   const { gestureHandler, translation, state, velocity } = usePanGestureHandler();
   const translateX = diffClamp(withDecay({ value: translation.x, velocity: velocity.x, state }), LEFTBOUNDARY, 0);
   const isDissapearing = -CARDWIDTH;
-  const isLeft = 0;
-  const isRight = SCREEN_WIDTH;
   const isAppearing = SCREEN_WIDTH;
 
   return (

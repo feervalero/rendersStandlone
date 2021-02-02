@@ -5,13 +5,11 @@ import {
   StyleSheet,
   View,
   TouchableOpacity,
-  Image,
   AsyncStorage,
 
 } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
 import Cards from "../AppManagement/Cards";
-import { banner, buttonRow, RATIO, SCREEN_HEIGHT, SCREEN_WIDTH, topBar } from "../AppManagement/Config";
+import { banner, buttonRow, RATIO, SCREEN_HEIGHT, topBar } from "../AppManagement/Config";
 import { Styles } from "../AppManagement/Styles";
 
 import HeroTable from "../Components/HeroTable";
@@ -85,6 +83,8 @@ export default class SaveOrEdit extends Component {
   };
   edit = () => { };
 
+  cardClicked = () => { }
+
   render() {
 
     if (this.state.table.length > 15) {
@@ -119,7 +119,7 @@ export default class SaveOrEdit extends Component {
                 shadowOpacity: 100,
                 shadowOffset: { height: 2, width: 2 },
               }}>
-                <HeroTable card={this.state.table} availableHeight={availableHeight} />
+                <HeroTable cardClicked={this.cardClicked} card={this.state.table} availableHeight={availableHeight} />
               </View>
 
             </View>
@@ -139,7 +139,7 @@ export default class SaveOrEdit extends Component {
                 </View>
 
                 <View style={{ borderRadius: 5, borderWidth: 1, borderColor: "white", backgroundColor: "#4D1A88", height: 40, flex: 1, margin: 10, justifyContent: "center" }}>
-                  <TouchableOpacity onPress={() => { props.navigation.popToTop() }}>
+                  <TouchableOpacity onPress={() => { this.props.navigation.goBack() }}>
                     <Text style={{ fontFamily: "Lapsus", fontSize: 20, color: "white", alignSelf: "center", }}>ATRAS</Text>
                   </TouchableOpacity>
                 </View>

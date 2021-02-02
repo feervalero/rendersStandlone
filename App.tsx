@@ -1,7 +1,5 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View, Button, SafeAreaView } from "react-native";
-import ViewList from "./ViewList";
+import { StyleSheet, SafeAreaView } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import CardManagerView from "./Views/CardManagement/CardManagerView";
@@ -16,7 +14,6 @@ import WinView from "./Views/Play/WinView";
 import Gestures from "./Views/AppManagement/Gestures";
 import GridSort from "./Views/Screens/GridSort";
 import { Styles } from "./Views/AppManagement/Styles";
-import Font from "./Views/Components/Font";
 import { useFonts } from "expo-font";
 import Animation from "./Views/Screens/Animation";
 import EditTable from "./Views/CardManagement/EditTable";
@@ -24,7 +21,6 @@ const Stack = createStackNavigator();
 
 export default function App({ navigation }) {
   function testClick() {
-    alert("hola FEr");
   }
   const [loaded, error] = useFonts({
     Lapsus: require("./assets/LapsusPro-Bold.otf"),
@@ -48,26 +44,10 @@ export default function App({ navigation }) {
             >
               {(props) => <Home {...props} />}
             </Stack.Screen>
-            <Stack.Screen name="CardManagerScreen.View" options={{
-              headerShown: false,
-            }}>
-              {(props) => <CardManagerView {...props} />}
-            </Stack.Screen>
-            <Stack.Screen name="CardManagerScreen.Style" options={{
-              headerShown: false,
-            }}>
-              {(props) => <SelectStyle {...props} />}
-            </Stack.Screen>
-            <Stack.Screen name="CardManagerScreen.SelectDouble" options={{
-              headerShown: false,
-            }}>
-              {(props) => <SelectDouble {...props} />}
-            </Stack.Screen>
-            <Stack.Screen name="CardManagerScreen.SaveOrEdit" options={{
-              headerShown: false,
-            }}>
-              {(props) => <SaveOrEdit {...props} />}
-            </Stack.Screen>
+            <Stack.Screen name="CardManagerScreen.View"  {...this} component={CardManagerView} options={{ headerShown: false, }} />
+            <Stack.Screen name="CardManagerScreen.SelectDouble"  {...this} component={SelectDouble} options={{ headerShown: false, }} />
+            <Stack.Screen name="CardManagerScreen.Style"  {...this} component={SelectStyle} options={{ headerShown: false, }} />
+            <Stack.Screen name="CardManagerScreen.SaveOrEdit"  {...this} component={SaveOrEdit} options={{ headerShown: false, }} />
             <Stack.Screen name="Play.Selector" options={{
               headerShown: false,
             }}>
@@ -75,7 +55,7 @@ export default function App({ navigation }) {
             </Stack.Screen>
             <Stack.Screen name="EditTable" options={{
               headerShown: false,
-            }}>
+            }} >
               {(props) => <EditTable {...props} />}
             </Stack.Screen>
             <Stack.Screen name="Play.View" options={{

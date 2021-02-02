@@ -62,7 +62,7 @@ export default class Selector extends Component {
   }
 
   moving = (event: PanGestureHandlerGestureEvent) => {
-    console.log(event.nativeEvent.translationX);
+
     if (event.nativeEvent.translationX < -100) {
       this._goLeft();
     } else if (event.nativeEvent.translationX > 100) {

@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { AsyncStorage, Text, View } from 'react-native'
+import { Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { withTimingTransition } from 'react-native-redash';
 import { buttonRow, RATIO, SCREEN_HEIGHT, topBar } from '../AppManagement/Config';
 import { Styles } from '../AppManagement/Styles'
 import HeroTable from '../Components/HeroTable'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 const availableHeight = SCREEN_HEIGHT - buttonRow - buttonRow - buttonRow;
 export class EditTable extends Component {
     state = { table: [], tables: [] }
@@ -27,19 +27,19 @@ export class EditTable extends Component {
     }
 
     cardClicked = (card: any, index: number) => {
-        console.log(card, index)
+
     }
 
     delete = () => {
 
         var newArr = this.state.tables;
-        console.log("carta", this.props.route.params.card)
-        console.log("tables", newArr)
-        newArr.find((e) => {
-            if (e.id == this.props.route.params.card.id) {
-                newArr.splice(newArr.indexOf(e), 1)
-
+        newArr.find((ec) => {
+            if (ec != null) {
+                if (ec.id == this.props.route.params.card.id) {
+                    newArr.splice(newArr.indexOf(ec), 1)
+                }
             }
+
         })
 
 
@@ -47,7 +47,12 @@ export class EditTable extends Component {
         AsyncStorage.setItem(
             "Tables",
             JSON.stringify({ tables: newArr }));
+
         this.props.navigation.pop();
+
+    }
+
+    save = () => {
 
     }
 
@@ -70,7 +75,7 @@ export class EditTable extends Component {
                 </View>
                 <View style={{ height: buttonRow * 1, flexDirection: "row", justifyContent: "space-around" }}>
 
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={this.save}>
                         <View style={Styles.button}>
                             <Text style={{ color: "white", fontFamily: "Lapsus", fontSize: 20 }}>GUARDAR</Text>
                         </View>

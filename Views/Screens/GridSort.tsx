@@ -17,7 +17,7 @@ export default class GridSort extends Component {
 const styles = StyleSheet.create({});
 
 function Card2(card: Card) {
-  console.log(card.name);
+
   return (
     <View>
       <Text>{card.name}</Text>

@@ -89,9 +89,7 @@ const styles = StyleSheet.create({
   },
   topSlider: {
     opacity: .5,
-    borderWidth: 1,
     alignSelf: "center",
-    position: "relative"
   },
   viewContainer: {
     backgroundColor: "#692DAF",

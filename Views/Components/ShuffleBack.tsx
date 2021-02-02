@@ -12,7 +12,7 @@ export default function ShuffleBack(props: any) {
     }
     if (currentCard) {
         return (
-            <Image source={Cards[currentCard].img} blurRadius={30} style={[{ opacity: .8, alignSelf: "center", position: "absolute", height, width: height / RATIO, zIndex: 80 }]} />
+            <Image source={Cards[currentCard - 1].img} blurRadius={30} style={[{ opacity: .8, alignSelf: "center", position: "absolute", height, width: height / RATIO, zIndex: 80 }]} />
         )
     } else {
         return <></>

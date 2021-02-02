@@ -5,6 +5,7 @@ import { PADDING } from "../AppManagement/Config";
 
 export default class HeroCard extends Component {
   render() {
+
     return (
       <View
         style={{

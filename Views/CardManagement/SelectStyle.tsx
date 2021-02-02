@@ -4,8 +4,6 @@ import {
   Text,
   StyleSheet,
   View,
-  Picker,
-  TouchableOpacity as Button,
   Image,
 } from "react-native";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
@@ -66,8 +64,6 @@ export default class SelectStyle extends Component {
   }
 
   render() {
-    const currentCard = this.state.cards[this.state.selector].cardArray;
-
     return (
       <View style={[Styles.viewContainer]}>
         <View style={[Styles.topBar]}>
@@ -100,21 +96,22 @@ export default class SelectStyle extends Component {
                   shadowOffset: { height: 2, width: 2 },
                 }}>
                 {table.cardArray.map((card, cardIndex) => (
-                  <><TouchableOpacity key={cardIndex} onPressOut={() => {
+                  <TouchableOpacity key={cardIndex} onPressOut={() => {
                     this.props.navigation.navigate("CardManagerScreen.SaveOrEdit", {
                       card: this.state.cards[this.state.indicator],
                       selectedDouble: this.props.route.params.double + 1,
                     })
                   }}>
                     <View>
+
                       <View style={{ width: CARDWIDTH, height: CARDWIDTH * RATIO, borderRadius: 5, marginStart: 5, marginBottom: 5, backgroundColor: "#4D1A88", position: "absolute" }}></View>
                       <Image
                         source={(card == 1) ? Cards[this.props.route.params.double].img : ""}
                         style={{ width: CARDWIDTH, height: CARDWIDTH * RATIO, borderRadius: 5, marginStart: 5, marginBottom: 5 }}
                       />
+
                     </View>
                   </TouchableOpacity>
-                  </>
                 ))}
               </View>
             ))}

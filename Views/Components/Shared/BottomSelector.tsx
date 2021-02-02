@@ -7,19 +7,22 @@ import { SCREEN_WIDTH } from '../../AppManagement/Config'
 const BottomSelector = (props: any) => {
 
     return (
-        <View style={{ bottom: 1, }}>
-            <View style={{ height: 90 }}>
-                <ImageBackground blurRadius={30} style={{ flex: 1, width: SCREEN_WIDTH, flexDirection: "row", justifyContent: "space-around", alignItems: "center" }} source={require("../../../assets/Cards/99.jpg")} >
-                    {props.tables.map(table => (<TouchableOpacity onPress={() => props.removeItem(table)}><Image source={Cards[table.double].img} style={styles.image} /></TouchableOpacity>))}
-                </ImageBackground>
+        <>
+
+            <View style={{ bottom: 1, }}>
+                <View style={{ height: 90 }}>
+                    <ImageBackground blurRadius={30} style={{ flex: 1, width: SCREEN_WIDTH, flexDirection: "row", justifyContent: "space-around", alignItems: "center" }} source={require("../../../assets/Cards/99.jpg")} >
+                        {props.tables.map(table => (<TouchableOpacity onPress={() => props.removeItem(table)}><Image source={Cards[table.double - 1].img} style={styles.image} /></TouchableOpacity>))}
+                    </ImageBackground>
+                </View>
+                <View style={{ height: 45, backgroundColor: "#4D1A88", justifyContent: "center", width: SCREEN_WIDTH }}><TouchableOpacity onPress={() => props.props.navigation.navigate("Play.View", { tablesSelected: props.tables })} style={{}}><Text style={{
+                    fontSize: 30, fontFamily: "Lapsus", color: "white", shadowOpacity: 1,
+                    shadowRadius: 5,
+                    shadowOffset: { height: 1, width: 1 },
+                    textAlign: "center"
+                }}>JUGAR</Text></TouchableOpacity></View>
             </View>
-            <View style={{ height: 45, backgroundColor: "#4D1A88", justifyContent: "center", width: SCREEN_WIDTH }}><TouchableOpacity onPress={() => props.props.navigation.navigate("Play.View", { tablesSelected: props.tables })} style={{}}><Text style={{
-                fontSize: 30, fontFamily: "Lapsus", color: "white", shadowOpacity: 1,
-                shadowRadius: 5,
-                shadowOffset: { height: 1, width: 1 },
-                textAlign: "center"
-            }}>JUGAR</Text></TouchableOpacity></View>
-        </View>
+        </>
     )
 }
 
